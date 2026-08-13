@@ -18,7 +18,7 @@ Astra is built using a modular n8n workflow that intelligently routes user reque
 This diagram illustrates the internal workflow, including intent routing, live search integration, memory handling, and response generation.
 
 <p align="center">
-  <img src="screenshots/Detailed Workflow.png" width="95%">
+  <img src="screenshots/Detailed Workflow.png.png" width="95%">
 </p>
 
 ---
