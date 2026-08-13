@@ -43,7 +43,7 @@ Astra interacts naturally through Telegram, providing conversational responses w
 
 # Conversation Example 1
 
-<img src="screenshots/Telegram Chat 1.png" width="320">
+<img src="screenshots/Telegram Chat 1.png" width="95%">
 
 </td>
 
