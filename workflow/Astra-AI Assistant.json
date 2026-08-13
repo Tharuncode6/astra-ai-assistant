@@ -1,0 +1,412 @@
+{
+  "name": "AI-Powered Multi-Agent Personal Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -544,
+        0
+      ],
+      "id": "4bf375d0-05f6-4c24-a618-594ced5b3509",
+      "name": "Telegram Trigger",
+      "webhookId": "8880c83d-8025-4673-a6fc-d168c5549de0",
+      "credentials": {
+        "telegramApi": {
+          "id": "ECR7hVmaD0IfFMHK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.text.toLowerCase() }}",
+                    "rightValue": ".*(weather|news|latest|current|stock|price|search).*",
+                    "operator": {
+                      "type": "string",
+                      "operation": "regex"
+                    },
+                    "id": "6fbb3576-fab3-4234-bd3f-0a19c812c286"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -336,
+        0
+      ],
+      "id": "b88b9301-70e1-4ce9-afc6-f0e40ace493e",
+      "name": "Intent Router"
+    },
+    {
+      "parameters": {
+        "url": "https://serpapi.com/search.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Telegram Trigger').first().json.message.text }}"
+            },
+            {
+              "name": "engine",
+              "value": "google_news"
+            },
+            {
+              "name": "api_key",
+              "value": "5bdce5252fb1e3f294ebc9d1b8056d2ce542a22b11e5b541db5d513d95e835b0"
+            },
+            {
+              "name": "json_restrictor",
+              "value": "news_results"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -64,
+        -176
+      ],
+      "id": "e73b562c-910e-4f5b-b67e-978564a6d356",
+      "name": "Google News Search"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=UUser question:\n{{ $('Telegram Trigger').first().json.message.text }}\n\nCurrent news results:\n{{ JSON.stringify(\n  ($json.news_results || [])\n    .slice(0, 5)\n    .map(item => ({\n      title: item.title,\n      source: item.source?.name || item.source,\n      date: item.date,\n      snippet: item.snippet\n    }))\n) }}\n\nAnswer the user's question directly using these current search results.\nSummarize the most relevant information in 3-5 concise bullet points.\nDo not mention n8n, JSON, SerpAPI, APIs, or your knowledge cutoff.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        80,
+        -176
+      ],
+      "id": "f1f4d073-1d30-4102-af5e-0d2e1f2c915d",
+      "name": "News Summarizer"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        16
+      ],
+      "id": "a905f40b-a175-49ed-99eb-2852ae4f8f86",
+      "name": "Groq LLM",
+      "credentials": {
+        "groqApi": {
+          "id": "iVE1iTJPmv58PUZe",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "8235552365",
+        "text": "={{ $json.text || $json.output || $json.response }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        16
+      ],
+      "id": "22292a0c-8127-4f55-90c3-9b0b38c5f21a",
+      "name": "Telegram Reply",
+      "webhookId": "2b434589-d86c-4300-a056-3c58819043ae",
+      "credentials": {
+        "telegramApi": {
+          "id": "ECR7hVmaD0IfFMHK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "You are a helpful AI assistant.\n\nAnswer conversational questions naturally.\n\nUse memory to remember previous conversations."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        16,
+        192
+      ],
+      "id": "55c92337-dcbb-4f52-898a-68ce9927eaf4",
+      "name": "Conversation Agent",
+      "alwaysOutputData": false,
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "maxTries": 2,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        144,
+        400
+      ],
+      "id": "ec4af812-ce21-43e4-bfb5-c8b71bdacf39",
+      "name": "Conversation Memory"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        400
+      ],
+      "id": "5b16eb3d-f4f7-4885-ac93-3e14ac6196fa",
+      "name": "Groq LLM (Chat)",
+      "credentials": {
+        "groqApi": {
+          "id": "iVE1iTJPmv58PUZe",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "User Input\nReceives user messages from Telegram.",
+        "height": 112,
+        "width": 166,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        160
+      ],
+      "typeVersion": 1,
+      "id": "55cfcedd-c646-4e34-91de-8dbc3ced4da5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Intent Routing\nRoutes requests to live search or conversational AI.",
+        "height": 112,
+        "width": 176,
+        "color": "#FFEA05"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -384,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "5de9db85-cb5a-4629-8cbd-486f4f02ecd5",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Live Search\nRetrieves current information using SerpAPI and summarizes results.",
+        "height": 128,
+        "width": 176,
+        "color": "#49FB3C"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "5119393d-fa29-49e0-86cd-df61530e0c4f",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Conversation AI\nHandles general questions using Groq LLM with conversation memory.",
+        "height": 112,
+        "width": 224,
+        "color": "#FF2E2E"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -224,
+        256
+      ],
+      "typeVersion": 1,
+      "id": "102c710b-6e50-4aa9-b324-14b689b51a57",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "Response\nSends the final response back to Telegram.",
+        "height": 80,
+        "width": 224,
+        "color": "#FF3DEF"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        400,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "e9adb26c-b399-40c1-9feb-1eef8b8b03c6",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Intent Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intent Router": {
+      "main": [
+        [
+          {
+            "node": "Google News Search",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Conversation Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google News Search": {
+      "main": [
+        [
+          {
+            "node": "News Summarizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "News Summarizer": {
+      "main": [
+        [
+          {
+            "node": "Telegram Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "News Summarizer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversation Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram Reply",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Conversation Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Conversation Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq LLM (Chat)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Conversation Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "319b811b-200a-482e-b2b0-44f56cd0bab4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "27fe20955f997608e5a795856e402d0539a19893c4dd11bfe2c1fe27d9276e8b"
+  },
+  "nodeGroups": [],
+  "id": "22fVeHhf2K88YvTG",
+  "tags": []
+}

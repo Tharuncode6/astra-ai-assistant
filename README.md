@@ -1,10 +1,9 @@
----
 
-# 📸 Project Walkthrough
+# Project Walkthrough
 
 The following screenshots showcase Astra's workflow, execution process, and conversational capabilities.
 
-## 🏗️ Workflow Architecture
+# Workflow Architecture
 
 Astra is built using a modular n8n workflow that intelligently routes user requests to either a conversational AI pipeline or a real-time search pipeline.
 
@@ -14,7 +13,7 @@ Astra is built using a modular n8n workflow that intelligently routes user reque
 
 ---
 
-## 🔍 Detailed Workflow
+# Detailed Workflow
 
 This diagram illustrates the internal workflow, including intent routing, live search integration, memory handling, and response generation.
 
@@ -24,7 +23,7 @@ This diagram illustrates the internal workflow, including intent routing, live s
 
 ---
 
-## ⚙️ Workflow Execution
+# Workflow Execution
 
 The execution view demonstrates how individual nodes process user requests and exchange data throughout the workflow.
 
@@ -34,7 +33,7 @@ The execution view demonstrates how individual nodes process user requests and e
 
 ---
 
-## 💬 Telegram Assistant Demo
+# Telegram Assistant Demo
 
 Astra interacts naturally through Telegram, providing conversational responses while maintaining context.
 
@@ -42,7 +41,7 @@ Astra interacts naturally through Telegram, providing conversational responses w
 <tr>
 <td align="center">
 
-### Conversation Example 1
+# Conversation Example 1
 
 <img src="screenshots/Telegram Chat 1.png" width="320">
 
@@ -50,22 +49,9 @@ Astra interacts naturally through Telegram, providing conversational responses w
 
 <td align="center">
 
-### Conversation Example 2
+# Conversation Example 2
 
 <img src="screenshots/Telegram Chat 2.png" width="320">
-
-</td>
-</tr>
-</table>
-
----
-
-## 🚨 Error Handling
-
-The workflow includes built-in validation and error handling to improve reliability during execution and simplify debugging.
-
-<p align="center">
-  <img src="screenshots/Workflow Error.png" width="85%">
-</p>
-
----
+Use Control + Shift + m to toggle the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
+No file chosen
+Attach files by dragging & dropping, selecting or pasting them.
