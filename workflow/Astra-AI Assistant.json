@@ -19,7 +19,7 @@
       "webhookId": "8880c83d-8025-4673-a6fc-d168c5549de0",
       "credentials": {
         "telegramApi": {
-          "id": "ECR7hVmaD0IfFMHK",
+          "id": "",
           "name": "Telegram account"
         }
       }
@@ -130,7 +130,7 @@
       "name": "Groq LLM",
       "credentials": {
         "groqApi": {
-          "id": "iVE1iTJPmv58PUZe",
+          "id": "",
           "name": "Groq account"
         }
       }
@@ -154,7 +154,7 @@
       "webhookId": "2b434589-d86c-4300-a056-3c58819043ae",
       "credentials": {
         "telegramApi": {
-          "id": "ECR7hVmaD0IfFMHK",
+          "id": "",
           "name": "Telegram account"
         }
       }
@@ -210,7 +210,7 @@
       "name": "Groq LLM (Chat)",
       "credentials": {
         "groqApi": {
-          "id": "iVE1iTJPmv58PUZe",
+          "id": "",
           "name": "Groq account"
         }
       }
