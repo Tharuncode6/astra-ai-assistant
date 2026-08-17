@@ -51,7 +51,7 @@ Astra interacts naturally through Telegram, providing conversational responses w
 
 # Conversation Example 2
 
-<img src="screenshots/Telegram Chat 2.png" width="95%">
+<img src=mv "screenshots/Detailed Workflow.png .png" "screenshots/detailed-workflow.png"
 Use Control + Shift + m to toggle the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
 No file chosen
 Attach files by dragging & dropping, selecting or pasting them.
