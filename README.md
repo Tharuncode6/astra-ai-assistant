@@ -1,4 +1,4 @@
-# 🌌 Astra AI Assistant
+# Astra AI Assistant
 
 <div align="center">
 
@@ -19,16 +19,16 @@ An intelligent multi-agent assistant that combines **Conversational AI**, **Real
 
 ---
 
-# 🚀 Overview
+# Overview
 
 Astra is an AI-powered personal assistant built using **n8n**, **Groq LLM**, **Telegram Bot API**, and **SerpAPI**.
 
 The assistant intelligently determines whether a user request requires:
 
-- 🤖 Conversational AI
-- 🌐 Real-time web search
-- 🧠 Context-aware memory
-- ⚡ Automated workflow execution
+- Conversational AI
+- Real-time web search
+- Context-aware memory
+- Automated workflow execution
 
 By combining workflow automation with modern LLMs and external APIs, Astra delivers fast, intelligent, and context-aware responses through Telegram.
 
@@ -36,21 +36,19 @@ The modular design also makes it easy to extend with additional capabilities suc
 
 ---
 
-# ✨ Features
+# Features
 
-- 🤖 Conversational AI powered by Groq LLM
-- 🌐 Real-time web search using SerpAPI
-- 💬 Telegram chatbot interface
-- 🧠 Context-aware conversation memory
-- 🔀 Intent-based routing using n8n
-- ⚡ Workflow automation
-- 🔌 REST API integration
-- 🐳 Docker deployment
-- 📦 Modular and scalable architecture
+- Conversational AI powered by Groq LLM
+- Real-time web search using SerpAPI
+- Telegram chatbot interface
+- Context-aware conversation memory
+- Intent-based routing using n8n
+- Workflow automation
+- REST API integration
+- Docker deployment
+- Modular and scalable architecture
 
----
-
-# 🛠️ Tech Stack
+# Tech Stack
 
 | Category | Technology |
 |-----------|------------|
@@ -64,7 +62,7 @@ The modular design also makes it easy to extend with additional capabilities suc
 
 ---
 
-# 🏗️ System Architecture
+# System Architecture
 
 The following diagram illustrates Astra's modular architecture and request routing process.
 
@@ -74,7 +72,7 @@ The following diagram illustrates Astra's modular architecture and request routi
 
 ---
 
-# 🔄 Workflow Overview
+# Workflow Overview
 
 The workflow receives user requests through Telegram, classifies the intent, routes the request to the appropriate AI pipeline, and returns the response back to the user.
 
@@ -84,7 +82,7 @@ The workflow receives user requests through Telegram, classifies the intent, rou
 
 ---
 
-# ⚙️ Detailed Workflow
+# Detailed Workflow
 
 The workflow below demonstrates how Astra processes user requests, integrates external APIs, manages conversational memory, and generates responses.
 
@@ -94,7 +92,7 @@ The workflow below demonstrates how Astra processes user requests, integrates ex
 
 ---
 
-# 📊 Workflow Execution
+# Workflow Execution
 
 Execution logs show the orchestration of workflow nodes and successful processing of user requests.
 
@@ -104,11 +102,11 @@ Execution logs show the orchestration of workflow nodes and successful processin
 
 ---
 
-# 💬 Telegram Assistant
+# Telegram Assistant
 
 Astra interacts naturally through Telegram while maintaining contextual conversations.
 
-## 🧠 Context-Aware Conversations
+## Context-Aware Conversations
 
 The assistant remembers information shared during the conversation, enabling more natural and personalized interactions.
 
@@ -118,7 +116,7 @@ The assistant remembers information shared during the conversation, enabling mor
 
 ---
 
-## 🌐 Real-Time Search
+## Real-Time Search
 
 Astra automatically switches to live web search whenever users request current information, delivering concise AI-generated summaries.
 
@@ -128,7 +126,7 @@ Astra automatically switches to live web search whenever users request current i
 
 ---
 
-# 🚨 Error Handling
+# Error Handling
 
 The workflow includes routing validation and execution monitoring to simplify debugging and improve reliability.
 
@@ -138,7 +136,7 @@ The workflow includes routing validation and execution monitoring to simplify de
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```text
 astra-ai-assistant/
@@ -166,7 +164,7 @@ astra-ai-assistant/
 
 ---
 
-# ⚙️ Installation
+# Installation
 
 ## Clone the repository
 
@@ -199,7 +197,7 @@ Configure the following credentials before running Astra:
 
 ---
 
-# 💬 Example Queries
+# Example Queries
 
 ### General Conversation
 
@@ -229,7 +227,7 @@ Latest OpenAI news
 
 ---
 
-# 📚 Skills Demonstrated
+# Skills Demonstrated
 
 - AI Workflow Automation
 - Multi-Agent AI Systems
@@ -244,7 +242,7 @@ Latest OpenAI news
 
 ---
 
-# 🛣️ Roadmap
+# Roadmap
 
 ### ✅ Version 1.0
 
@@ -254,21 +252,21 @@ Latest OpenAI news
 - Conversation Memory
 - Docker Deployment
 
-### 🚀 Future Enhancements
+### Future Enhancements
 
-- 🎤 Voice Assistant
-- 🧠 Long-Term Memory using Vector Databases
-- 📄 Retrieval-Augmented Generation (RAG)
-- 📧 Gmail Integration
-- 📅 Google Calendar Integration
-- 🌦 Weather API
-- 📈 Stock Market API
-- 🌍 Multi-language Support
-- 🖥 Web Dashboard
+- Voice Assistant
+- Long-Term Memory using Vector Databases
+- Retrieval-Augmented Generation (RAG)
+- Gmail Integration
+- Google Calendar Integration
+- Weather API
+- Stock Market API
+- Multi-language Support
+- Web Dashboard
 
 ---
 
-# 🤝 Contributing
+# Contributing
 
 Contributions, feature requests, and suggestions are welcome.
 
@@ -276,7 +274,7 @@ Feel free to fork the repository and submit a pull request.
 
 ---
 
-# 📄 License
+# License
 
 This project is licensed under the **MIT License**.
 
@@ -284,7 +282,7 @@ See the **LICENSE** file for additional information.
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Tharun Reddy**
 
@@ -294,8 +292,5 @@ See the **LICENSE** file for additional information.
 
 <div align="center">
 
-### ⭐ If you found Astra interesting, consider giving the repository a star!
-
-**Built with ❤️ using n8n, Groq, Telegram Bot API, and SerpAPI**
 
 </div>
